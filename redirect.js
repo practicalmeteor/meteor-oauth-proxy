@@ -50,12 +50,13 @@ OAuth._redirectUri = function (serviceName, config, params, absoluteUrlOptions) 
     });
   }
 
+
   if (config.proxyUrl ){
     absoluteUrlOptions = absoluteUrlOptions || {};
     params = params || {};
 
     absoluteUrlOptions.rootUrl = config.proxyUrl;
-    params.domain = Meteor.absoluteUrl();
+    params.domain = Meteor.absoluteUrl().match(/^https?\:\/\/([^\/:?#]+)(?:[\/:?#]|$)/i)[1];
   }
 
   return URL._constructUrl(

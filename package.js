@@ -15,6 +15,7 @@ Package.onUse(function (api) {
 
 Package.onTest(function (api) {
   api.use('practicalmeteor:mocha');
+  api.use('practicalmeteor:sinon');
   api.use('coffeescript');
   api.use('practicalmeteor:oauth-proxy');
 

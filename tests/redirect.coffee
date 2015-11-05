@@ -1,5 +1,8 @@
 describe "redirect", ->
 
+  beforeEach ->
+    @rootDomain = Meteor.absoluteUrl().match(/^https?\:\/\/([^\/:?#]+)(?:[\/:?#]|$)/i)[1]
+
   it "create redirect url using proxyUrl", ->
 
     config = {
@@ -7,5 +10,5 @@ describe "redirect", ->
     }
     redirectUri = OAuth._redirectUri("github", config)
     expect(redirectUri).to.equal(
-      "#{config.proxyUrl}_oauth/github?close&domain=#{encodeURIComponent(Meteor.absoluteUrl())}"
+      "#{config.proxyUrl}_oauth/github?close&domain=#{@rootDomain}"
     )
