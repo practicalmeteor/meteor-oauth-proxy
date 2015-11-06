@@ -10,5 +10,5 @@ describe "redirect", ->
     }
     redirectUri = OAuth._redirectUri("github", config)
     expect(redirectUri).to.equal(
-      "#{config.proxyUrl}_oauth/github?close&domain=#{@rootDomain}"
+      "#{config.proxyUrl}_oauth/github/#{@rootDomain}?close"
     )

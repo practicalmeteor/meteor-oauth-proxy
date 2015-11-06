@@ -11,7 +11,6 @@ OAuth._redirectUri = function (serviceName, config, params, absoluteUrlOptions) 
     // This logic is duplicated in the tool so that the tool can do OAuth
     // flow with <= 0.9.0 servers (tools/auth.js).
     var query = config.loginStyle ? null : "close";
-
     // Clone because we're going to mutate 'params'. The 'cordova' and
     // 'android' parameters are only used for picking the host of the
     // redirect URL, and not actually included in the redirect URL itself.
@@ -55,16 +54,17 @@ OAuth._redirectUri = function (serviceName, config, params, absoluteUrlOptions) 
     }
 
 
+    var domain = "";
     if (config.proxyUrl) {
       absoluteUrlOptions = absoluteUrlOptions || {};
       params = params || {};
 
       absoluteUrlOptions.rootUrl = config.proxyUrl;
-      params.domain = Meteor.absoluteUrl().match(/^https?\:\/\/([^\/:?#]+)(?:[\/:?#]|$)/i)[1];
+      domain = config.domain || Meteor.absoluteUrl().match(/^https?\:\/\/([^\/:?#]+)(?:[\/:?#]|$)/i)[1];
     }
 
     var redirectUri = URL._constructUrl(
-        Meteor.absoluteUrl('_oauth/' + serviceName, absoluteUrlOptions),
+        Meteor.absoluteUrl('_oauth/' + serviceName + "/" + domain, absoluteUrlOptions),
         query,
         params);
 
