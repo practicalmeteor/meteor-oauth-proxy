@@ -8,6 +8,8 @@ Package.onUse(function (api) {
   api.use('oauth');
   api.use('url');
 
+  api.use('practicalmeteor:loglevel');
+
   api.imply("oauth");
   api.addFiles('redirect.js');
 });
